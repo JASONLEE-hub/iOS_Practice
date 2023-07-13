@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct AutoAddView: View {
-    // 에러... 이유 모름..
+    // 에러해결, 인덱스 에러로 확인, AutoAddScouter에서 -1을 해주어야했다.
     var scouterStore: ScouterStore
     @ObservedObject var autoScouterStore: AutoScouterStore = AutoScouterStore()
     @State var scouter: Scouter = Scouter(tier: 5, name: "", race: "", powerLevels: 0, imageName: "")

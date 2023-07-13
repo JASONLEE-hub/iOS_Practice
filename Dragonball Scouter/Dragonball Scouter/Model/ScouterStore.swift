@@ -37,7 +37,7 @@ class AutoScouterStore: ObservableObject {
     }
     
     func AutoAddScouter() -> Scouter {
-        // 에러... 이유 모름..
+        // 에러해결, 인덱스 에러로 확인, -1을 해주어야했다.
         let scouter: Scouter
         var tierArray: [Scouter] = []
         

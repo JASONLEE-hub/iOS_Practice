@@ -1,24 +1,19 @@
 //
-//  ManualAddView.swift
+//  DetailView.swift
 //  Dragonball Scouter
 //
-//  Created by 이재승 on 2023/07/09.
+//  Created by 이재승 on 2023/07/13.
 //
 
 import SwiftUI
 import AVFoundation
 
-struct ManualAddView: View {
+struct DetailView: View {
     
     var scouterStore: ScouterStore
-    @State var name: String = ""
-    @State var race: String = ""
-    @State var powerLevels: Int = 0
-    
-    @Binding var isShowingAddSheet: Bool
+    var scouter: Scouter
     
     var body: some View {
-        
         VStack(alignment: .trailing) {
             
             ZStack { // Zstack으로 텍스트와 렌즈 겹치기
@@ -29,31 +24,38 @@ struct ManualAddView: View {
                 
                 VStack (alignment: .leading) {
                     Group {
-                        Text("Write a name")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.yellow)
-                        TextField("Name", text: $name)
-                            .font(.largeTitle)
                         
-                        Text("Write a race")
+                        Text("Name")
                             .font(.title2)
                             .bold()
                             .foregroundColor(.yellow)
-                        TextField("Race", text: $race)
+                        Text(scouter.name)
                             .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(.yellow)
+                        Text("")
+                        
+                        Text("Race")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(.yellow)
+                        Text(scouter.race)
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(.yellow)
+                        Text("")
                         
                         Text("Checking a power")
                             .font(.title2)
                             .bold()
                             .foregroundColor(.yellow)
-                        Text("\(powerLevels)")
+                        Text("\(scouter.powerLevels)")
                             .font(.largeTitle)
                             .bold()
                             .foregroundColor(.yellow)
                     }
                     // 이미지 오른쪽 정렬하고 싶다.
-                    Image("Unknown")
+                    Image(scouter.imageName)
                         .resizable()
                         .frame(width: 130.0, height: 150.0)
                     
@@ -62,7 +64,7 @@ struct ManualAddView: View {
             }
         }
         
-        // Power Level 체크 버튼
+        // 수정 버튼
         .toolbar {
             ToolbarItem(placement:.bottomBar) {
                 ZStack (alignment: .bottom) {
@@ -71,17 +73,14 @@ struct ManualAddView: View {
                         .frame(width: 400.0, height: 120.0)
                     
                     Button {
-                        guard name != "" && race != "" else {
-                            return
-                        }
-                        powerLevels = Int.random(in: 1...500)
+                        // 구현 필요, 아이디어, isdisable같은 메서드 사용?으로 텍스트 필드와 텍스트 껐다 켜기.
                     } label: {
                         ZStack {
                             Image("ScouterStick2")
                                 .resizable()
                                 .frame(width: 350.0, height: 80.0)
                             
-                            Text("Power Check")
+                            Text("Change the details")
                                 .font(.largeTitle)
                                 .bold()
                                 .foregroundColor(.yellow)
@@ -89,40 +88,15 @@ struct ManualAddView: View {
                     }
                 }
             }
-            // 네비게이션 탑 버튼
-            ToolbarItem(placement:.navigationBarTrailing) {
-                Button {
-                    scouterStore.AddScouter(tier: 5, name: name, race: race, powerLevels: Int(powerLevels), ImageName: "Unknown")
-                    isShowingAddSheet = false
-                    // 저장 및 시트 내리기
-                } label: {
-                    Text("⌨︎")
-                        .font(.largeTitle)
-                }
-
-            }
-            
-            ToolbarItem(placement:.navigationBarLeading) {
-                Button {
-                    isShowingAddSheet = false
-                    // 시트 내리기
-                } label: {
-                    Text("🁢")
-                        .font(.largeTitle)
-                }
-
-            }
-            
         }
-        .navigationTitle("Manual Finder")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("\(scouter.name)'s Details")
     }
 }
 
-struct ManualAddView_Previews: PreviewProvider {
+struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            ManualAddView(scouterStore: ScouterStore(), isShowingAddSheet: .constant(true))
+        NavigationView {
+            DetailView(scouterStore: ScouterStore(), scouter: Nappa)
         }
     }
 }

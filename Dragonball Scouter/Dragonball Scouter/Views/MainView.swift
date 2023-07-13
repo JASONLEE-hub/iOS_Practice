@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MainView: View {
     
@@ -16,8 +17,15 @@ struct MainView: View {
     
     var body: some View {
         VStack {
+            // 전사 스카우터 리스트
             List (scouterStore.scouters) { scouter in
-                ScouterView(scouterStore: scouterStore, scouter: scouter)
+                // DetailView로 넘어가기
+                NavigationLink {
+                    DetailView(scouterStore: scouterStore, scouter: scouter)
+                } label: {
+                    ScouterView(scouterStore: scouterStore, scouter: scouter)
+                }
+                
             }
             .navigationTitle("Scouter")
             .listStyle(.plain)
@@ -46,6 +54,7 @@ struct MainView: View {
                             
                             Button {
                                 isShowingAutoAddSheet = true
+                                readSomething(something: "IKUZO!")
                                 // 랜덤 전사 서치
                             } label: {
                                 ZStack {
