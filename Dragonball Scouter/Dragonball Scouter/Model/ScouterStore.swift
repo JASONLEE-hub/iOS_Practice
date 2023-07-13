@@ -51,7 +51,7 @@ class AutoScouterStore: ObservableObject {
                     tierArray.append(scouter)
                 }
             }
-            let randomTierIndex: Int = Int.random(in: 0...tierArray.count)
+            let randomTierIndex: Int = Int.random(in: 0...tierArray.count-1)
             scouter = tierArray[randomTierIndex]
             tierArray.removeAll()
             return scouter
@@ -63,7 +63,7 @@ class AutoScouterStore: ObservableObject {
                     tierArray.append(scouter)
                 }
             }
-            let randomTierIndex: Int = Int.random(in: 0...tierArray.count)
+            let randomTierIndex: Int = Int.random(in: 0...tierArray.count-1)
             scouter = tierArray[randomTierIndex]
             tierArray.removeAll()
             return scouter
@@ -75,7 +75,7 @@ class AutoScouterStore: ObservableObject {
                     tierArray.append(scouter)
                 }
             }
-            let randomTierIndex: Int = Int.random(in: 0...tierArray.count)
+            let randomTierIndex: Int = Int.random(in: 0...tierArray.count-1)
             scouter = tierArray[randomTierIndex]
             tierArray.removeAll()
             return scouter
@@ -87,7 +87,7 @@ class AutoScouterStore: ObservableObject {
                     tierArray.append(scouter)
                 }
             }
-            let randomTierIndex: Int = Int.random(in: 0...tierArray.count)
+            let randomTierIndex: Int = Int.random(in: 0...tierArray.count-1)
             scouter = tierArray[randomTierIndex]
             tierArray.removeAll()
             return scouter
@@ -99,7 +99,7 @@ class AutoScouterStore: ObservableObject {
                     tierArray.append(scouter)
                 }
             }
-            let randomTierIndex: Int = Int.random(in: 0...tierArray.count)
+            let randomTierIndex: Int = Int.random(in: 0...tierArray.count-1)
             scouter = tierArray[randomTierIndex]
             tierArray.removeAll()
             return scouter
@@ -111,7 +111,7 @@ class AutoScouterStore: ObservableObject {
                     tierArray.append(scouter)
                 }
             }
-            let randomTierIndex: Int = Int.random(in: 0...tierArray.count)
+            let randomTierIndex: Int = Int.random(in: 0...tierArray.count-1)
             scouter = tierArray[randomTierIndex]
             tierArray.removeAll()
             return scouter

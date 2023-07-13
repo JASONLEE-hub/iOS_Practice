@@ -11,7 +11,7 @@ struct AutoAddView: View {
     // 에러... 이유 모름..
     var scouterStore: ScouterStore
     @ObservedObject var autoScouterStore: AutoScouterStore = AutoScouterStore()
-    @State var scouter: Scouter = Farmer
+    @State var scouter: Scouter = Scouter(tier: 5, name: "", race: "", powerLevels: 0, imageName: "")
     
     @Binding var isShowingAutoAddSheet: Bool
     
