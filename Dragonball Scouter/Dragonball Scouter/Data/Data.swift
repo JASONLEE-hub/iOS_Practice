@@ -15,7 +15,9 @@ let Ginyu: Scouter = Scouter(tier: 4, name: "Ginyu", race: "???", powerLevels: 1
 
 let MrSatan: Scouter = Scouter(tier: 5, name: "Mr.Satan", race: "Human", powerLevels: 64, imageName: "MrSatan")
 
-let Goku: Scouter = Scouter(tier: 2, name: "Goku", race: "Saiyan", powerLevels: 3000000, imageName: "Goku")
+let Goku: Scouter = Scouter(tier: 3, name: "Goku", race: "Saiyan", powerLevels: 3000000, imageName: "Goku")
+
+let GokuKAIO: Scouter = Scouter(tier: 2, name: "Goku", race: "Saiyan", powerLevels: 60000000, imageName: "GokuKAIO")
 
 let GokuSSJ: Scouter = Scouter(tier: 1, name: "Goku", race: "Super Saiyan", powerLevels: 150000000, imageName: "GokuSSJ")
 
@@ -31,5 +33,5 @@ let Farmer: Scouter = Scouter(tier: 5, name: "Farmer", race: "Human", powerLevel
 
 // 전사 자동 추가시 사용할 데이터입니다.
 
-var AutoScouters: [Scouter] = [Nappa, Ginyu, MrSatan, Goku, Vegeta, Freezer, Farmer, GokuSSJ, Freezer01, FreezerFULL]
+var AutoScouters: [Scouter] = [Nappa, Ginyu, MrSatan, Goku, Vegeta, Freezer, Farmer, GokuKAIO, GokuSSJ, Freezer01, FreezerFULL]
 

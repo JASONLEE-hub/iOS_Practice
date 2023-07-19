@@ -26,6 +26,7 @@
 		0868540E2A60391700952D4D /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		086854112A603DBE00952D4D /* Func.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Func.swift; sourceTree = "<group>"; };
 		086854132A603DC800952D4D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		08DB67AF2A683182008D404E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6936F0CF2A5AE1940045C98C /* AutoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAddView.swift; sourceTree = "<group>"; };
 		696D2CA72A5AA1D9005F2CBF /* Dragonball Scouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dragonball Scouter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		696D2CAA2A5AA1D9005F2CBF /* Dragonball_ScouterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragonball_ScouterApp.swift; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 		696D2C9E2A5AA1D9005F2CBF = {
 			isa = PBXGroup;
 			children = (
+				08DB67AF2A683182008D404E /* README.md */,
 				696D2CA92A5AA1D9005F2CBF /* Dragonball Scouter */,
 				696D2CA82A5AA1D9005F2CBF /* Products */,
 			);

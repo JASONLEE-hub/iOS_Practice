@@ -21,7 +21,7 @@ struct MainView: View {
     
     var body: some View {
         VStack {
-            // 파워순으로 정렬 버튼
+            // 전투력순으로 정렬하는 버튼입니다.
             HStack {
                 Button {
                     readSomething(speechSynth: speechSynth, something: "Power Sort!")
@@ -54,6 +54,7 @@ struct MainView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
+                        // 수동 전사 추가 뷰를 시트로 넘어가기
                         isShowingAddSheet = true
                     } label: {
                         Text("◼︎")
@@ -74,9 +75,9 @@ struct MainView: View {
                                 .frame(width: 400.0, height: 120.0)
                             
                             Button {
+                                // 자동 전사 추가 뷰를 시트로 넘어가기
                                 isShowingAutoAddSheet = true
                                 readSomething(speechSynth: speechSynth, something: "이쿠조")
-                                // 랜덤 전사 서치
                             } label: {
                                 ZStack {
                                     Image("ScouterStick2")

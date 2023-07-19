@@ -59,7 +59,7 @@ struct AutoAddView: View {
                             .bold()
                             .foregroundColor(.yellow)
                     }
-                    // 이미지 오른쪽 정렬하고 싶다.
+
                     Image(scouter.imageName)
                         .resizable()
                         .frame(width: 130.0, height: 150.0)
@@ -94,7 +94,7 @@ struct AutoAddView: View {
                     }
                 }
             }
-            // 네비게이션 탑 버튼
+            // 네비게이션 탑 저장 버튼
             ToolbarItem(placement:.navigationBarTrailing) {
                 Button {
                     scouterStore.AddScouter(tier: scouter.tier, name: scouter.name, race: scouter.race, powerLevels: Int(scouter.powerLevels), ImageName: scouter.imageName)
@@ -106,7 +106,7 @@ struct AutoAddView: View {
                 }
                 
             }
-            
+            // 취소 버튼
             ToolbarItem(placement:.navigationBarLeading) {
                 Button {
                     isShowingAutoAddSheet = false

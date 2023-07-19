@@ -25,12 +25,12 @@ func scouterSort(scouters: [Scouter]) -> [Scouter]{
     
     var powerLevelsArray: [Int] = []
     
-    // 새 배열에 파워레벨을 넣는다.
+    // 새 배열에 전투력을 넣는다.
     for scouter in scouters {
         powerLevelsArray.append(scouter.powerLevels)
     }
     
-    // 배열에 중복을 제거해준다.
+    // 배열에 전투력 중복을 제거해준다. (중복시, 후 새 배열에 추가할 때 여러개가 추가되는 경우를 방지하기 위해)
     var removedArray: [Int] = []
     
     for powerLevel in powerLevelsArray {
@@ -39,7 +39,7 @@ func scouterSort(scouters: [Scouter]) -> [Scouter]{
         }
     }
     
-    // 파워레벨 정렬
+    // 내림차순 정렬
     removedArray.sort { a, b in
         return a > b
     }
@@ -49,6 +49,7 @@ func scouterSort(scouters: [Scouter]) -> [Scouter]{
     // return하기 위한 새 배열
     var newScouterArray: [Scouter] = []
     
+    // 파워레벨이 같을 경우, 새 배열에 추가하기
     for powerLevel in removedArray {
         for scouter in scouters {
             if powerLevel == scouter.powerLevels {

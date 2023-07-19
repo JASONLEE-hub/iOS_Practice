@@ -60,6 +60,7 @@ struct DetailView: View {
                             .foregroundColor(.yellow)
                     }
                     
+                    // 이름 및 전투력 읽어주기
                     Button {
                         readSomething(speechSynth: speechSynth, something: "\(scouter.name)...센토우료쿠\(scouter.powerLevels)")
                     } label: {
@@ -73,7 +74,7 @@ struct DetailView: View {
             }
         }
         
-        // 수정 버튼
+        
         .toolbar {
             ToolbarItem(placement:.bottomBar) {
                 ZStack {
@@ -82,6 +83,7 @@ struct DetailView: View {
                         .frame(width: 400.0, height: 120.0)
                     
                     HStack {
+                        // 현재 전사를 새로운 전사로 변경하기 버튼
                         Button {
                             isChanging = true
                             readSomething(speechSynth: speechSynth, something: "Are you okay?")
@@ -101,6 +103,7 @@ struct DetailView: View {
                         Text(" ")
                         
                         Button {
+                            // 현재 전사를 삭제 버튼
                             isRemoving = true
                             readSomething(speechSynth: speechSynth, something: "Are you okay?")
                         } label: {
