@@ -8,6 +8,8 @@
 import SwiftUI
 import AVFoundation
 
+
+// 메인뷰입니다.
 struct MainView: View {
     
     @ObservedObject var scouterStore: ScouterStore = ScouterStore()
@@ -15,11 +17,30 @@ struct MainView: View {
     @State var isShowingAddSheet: Bool = false
     @State var isShowingAutoAddSheet: Bool = false
     
+    let speechSynth = AVSpeechSynthesizer()
+    
     var body: some View {
         VStack {
+            // 파워순으로 정렬 버튼
+            HStack {
+                Button {
+                    readSomething(speechSynth: speechSynth, something: "Power Sort!")
+                    scouterStore.scouters = scouterSort(scouters: scouterStore.scouters)
+                } label: {
+                    Text("★☁︎☉☈ | ")
+                    Text("POWER LEVELS SORT")
+                        .font(.headline)
+                        .foregroundColor(.accentColor)
+                        
+                }
+            }
+            
+            
             // 전사 스카우터 리스트
             List (scouterStore.scouters) { scouter in
                 // DetailView로 넘어가기
+                // Q. View를 넘기면서, 읽어주기 기능 함수를 사용할 수 없을까요?
+                // readSomething(speechSynth: speechSynth, something: "\(scouter.name)")
                 NavigationLink {
                     DetailView(scouterStore: scouterStore, scouter: scouter)
                 } label: {
@@ -54,7 +75,7 @@ struct MainView: View {
                             
                             Button {
                                 isShowingAutoAddSheet = true
-                                readSomething(something: "IKUZO!")
+                                readSomething(speechSynth: speechSynth, something: "이쿠조")
                                 // 랜덤 전사 서치
                             } label: {
                                 ZStack {

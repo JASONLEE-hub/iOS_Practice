@@ -16,6 +16,8 @@ struct AutoAddView: View {
     
     @Binding var isShowingAutoAddSheet: Bool
     
+    let speechSynth = AVSpeechSynthesizer()
+    
     var body: some View {
         VStack(alignment: .trailing) {
             
@@ -77,7 +79,7 @@ struct AutoAddView: View {
                     
                     Button {
                         scouter = autoScouterStore.AutoAddScouter()
-                        
+                        readSomething(speechSynth: speechSynth, something: "나-니?!..\(scouter.name)")
                     } label: {
                         ZStack {
                             Image("ScouterStick2")

@@ -17,6 +17,8 @@ struct ManualAddView: View {
     
     @Binding var isShowingAddSheet: Bool
     
+    let speechSynth = AVSpeechSynthesizer()
+    
     var body: some View {
         
         VStack(alignment: .trailing) {
@@ -75,6 +77,7 @@ struct ManualAddView: View {
                             return
                         }
                         powerLevels = Int.random(in: 1...500)
+                        readSomething(speechSynth: speechSynth, something: "띠띠띠띠띠..센토우료쿠 \(powerLevels)")
                     } label: {
                         ZStack {
                             Image("ScouterStick2")

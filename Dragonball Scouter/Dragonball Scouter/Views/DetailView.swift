@@ -11,7 +11,12 @@ import AVFoundation
 struct DetailView: View {
     
     var scouterStore: ScouterStore
-    var scouter: Scouter
+    @State var scouter: Scouter
+    
+    @State var isChanging = false
+    @State var isRemoving = false
+    
+    let speechSynth = AVSpeechSynthesizer()
     
     var body: some View {
         VStack(alignment: .trailing) {
@@ -54,11 +59,15 @@ struct DetailView: View {
                             .bold()
                             .foregroundColor(.yellow)
                     }
-                    // 이미지 오른쪽 정렬하고 싶다.
-                    Image(scouter.imageName)
-                        .resizable()
-                        .frame(width: 130.0, height: 150.0)
                     
+                    Button {
+                        readSomething(speechSynth: speechSynth, something: "\(scouter.name)...센토우료쿠\(scouter.powerLevels)")
+                    } label: {
+                        Image(scouter.imageName)
+                            .resizable()
+                            .frame(width: 130.0, height: 150.0)
+                    }
+            
                 }
                 .padding()
             }
@@ -67,23 +76,46 @@ struct DetailView: View {
         // 수정 버튼
         .toolbar {
             ToolbarItem(placement:.bottomBar) {
-                ZStack (alignment: .bottom) {
+                ZStack {
                     Image("ScouterStick1")
                         .resizable()
                         .frame(width: 400.0, height: 120.0)
                     
-                    Button {
-                        // 구현 필요, 아이디어, isdisable같은 메서드 사용?으로 텍스트 필드와 텍스트 껐다 켜기.
-                    } label: {
-                        ZStack {
-                            Image("ScouterStick2")
-                                .resizable()
-                                .frame(width: 350.0, height: 80.0)
-                            
-                            Text("Change the details")
-                                .font(.largeTitle)
+                    HStack {
+                        Button {
+                            isChanging = true
+                            readSomething(speechSynth: speechSynth, something: "Are you okay?")
+                        } label: {
+                            Image(systemName: "arrow.clockwise.circle.fill")
+                                .font(.title)
                                 .bold()
-                                .foregroundColor(.yellow)
+                        }
+                        .frame(width: 110.0, height: 80.0)
+                        .background(.gray)
+                        .alert("Are you sure you want to change the warrior?", isPresented: $isChanging) {
+                            Button("Cancel", role: .cancel) {}
+                            Button("Yes", role: .destructive) {
+                                self.scouter = scouterStore.changeScouter(scouter: scouter)}
+                        }
+                        
+                        Text(" ")
+                        
+                        Button {
+                            isRemoving = true
+                            readSomething(speechSynth: speechSynth, something: "Are you okay?")
+                        } label: {
+                            Image(systemName: "trash.circle")
+                                .font(.title)
+                                .bold()
+                        }
+                        .frame(width: 110.0, height: 80.0)
+                        .background(.gray)
+                        .alert("Are you sure you want to remove the warrior?", isPresented: $isRemoving) {
+                            Button("Cancel", role: .cancel) {}
+                            Button("Yes", role: .destructive) {
+                                scouterStore.removeScouter(scouter: scouter)
+                                // Q. 삭제 후 MainView로 돌리고 싶었지만, NavigationLink를 사용하여 되돌릴 방법이 없었습니다. Yes 클릭시 MainView로 돌아갈 수 있을까요?
+                            }
                         }
                     }
                 }
