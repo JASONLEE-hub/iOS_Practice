@@ -11,12 +11,36 @@ import SwiftUI
 class ScouterStore: ObservableObject {
     @Published var scouters: [Scouter] = []
     
+    init() {
+        // UserDefaults에서 데이터 가져오기
+        fetch()
+    }
+    
+    func fetch() {
+        // UserDefaults에서 데이터 가져오기
+        do {
+            if let data = UserDefaults.standard.object(forKey: "scoutersData") as? Data {
+                scouters = try
+                JSONDecoder().decode([Scouter].self, from: data)
+            }
+        } catch {
+            print("UserDefaults로 부터 데이터 가져오기 실패")
+        }
+    }
+    
     // 전사 수동 추가시 사용하는 메서드입니다.
     func AddScouter(tier: Int, name: String, race: String, powerLevels: Int, ImageName: String) {
         // 데이터가 0이 아닐 시 사용 가능합니다.
         if name.count > 0 && race.count > 0 && powerLevels > 0 {
             let scouter: Scouter = Scouter(tier: tier, name: name, race: race, powerLevels: powerLevels, imageName: ImageName)
             scouters.insert(scouter, at: 0)
+        }
+        
+        do {
+            let data: Data = try JSONEncoder().encode(scouters)
+            UserDefaults.standard.set(data, forKey: "scoutersData")
+        } catch {
+            print("JSON 생성 후 UserDefaults 실패")
         }
     }
     
@@ -30,6 +54,13 @@ class ScouterStore: ObservableObject {
                 break
             }
             index += 1
+        }
+        
+        do {
+            let data: Data = try JSONEncoder().encode(scouters)
+            UserDefaults.standard.set(data, forKey: "scoutersData")
+        } catch {
+            print("JSON 생성 후 UserDefaults 실패")
         }
     }
     

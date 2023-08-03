@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct Scouter: Identifiable {
-    let id: UUID = UUID()
-    let tier: Int
+struct Scouter: Identifiable, Codable {
+    var id: UUID = UUID()
+    var tier: Int
     var name: String
     var race: String
     var powerLevels: Int
