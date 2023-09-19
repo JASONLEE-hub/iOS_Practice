@@ -6,7 +6,10 @@
 //
 
 import SwiftUI
+import AVFoundation
 
+
+// 메인뷰입니다.
 struct MainView: View {
     
     @ObservedObject var scouterStore: ScouterStore = ScouterStore()
@@ -14,10 +17,36 @@ struct MainView: View {
     @State var isShowingAddSheet: Bool = false
     @State var isShowingAutoAddSheet: Bool = false
     
+    let speechSynth = AVSpeechSynthesizer()
+    
     var body: some View {
         VStack {
+            // 전투력순으로 정렬하는 버튼입니다.
+            HStack {
+                Button {
+                    readSomething(speechSynth: speechSynth, something: "Power Sort!")
+                    scouterStore.scouters = scouterSort(scouters: scouterStore.scouters)
+                } label: {
+                    Text("★☁︎☉☈ | ")
+                    Text("POWER LEVELS SORT")
+                        .font(.headline)
+                        .foregroundColor(.accentColor)
+                        
+                }
+            }
+            
+            
+            // 전사 스카우터 리스트
             List (scouterStore.scouters) { scouter in
-                ScouterView(scouterStore: scouterStore, scouter: scouter)
+                // DetailView로 넘어가기
+                // Q. View를 넘기면서, 읽어주기 기능 함수를 사용할 수 없을까요?
+                // readSomething(speechSynth: speechSynth, something: "\(scouter.name)")
+                NavigationLink {
+                    DetailView(scouterStore: scouterStore, scouter: scouter)
+                } label: {
+                    ScouterView(scouterStore: scouterStore, scouter: scouter)
+                }
+                
             }
             .navigationTitle("Scouter")
             .listStyle(.plain)
@@ -25,6 +54,7 @@ struct MainView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
+                        // 수동 전사 추가 뷰를 시트로 넘어가기
                         isShowingAddSheet = true
                     } label: {
                         Text("◼︎")
@@ -45,8 +75,9 @@ struct MainView: View {
                                 .frame(width: 400.0, height: 120.0)
                             
                             Button {
+                                // 자동 전사 추가 뷰를 시트로 넘어가기
                                 isShowingAutoAddSheet = true
-                                // 랜덤 전사 서치
+                                readSomething(speechSynth: speechSynth, something: "이쿠조")
                             } label: {
                                 ZStack {
                                     Image("ScouterStick2")

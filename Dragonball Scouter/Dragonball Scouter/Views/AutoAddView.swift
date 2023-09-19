@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct AutoAddView: View {
-    // 에러... 이유 모름..
+    // 에러해결, 인덱스 에러로 확인, AutoAddScouter에서 -1을 해주어야했다.
     var scouterStore: ScouterStore
     @ObservedObject var autoScouterStore: AutoScouterStore = AutoScouterStore()
     @State var scouter: Scouter = Scouter(tier: 5, name: "", race: "", powerLevels: 0, imageName: "")
     
     @Binding var isShowingAutoAddSheet: Bool
+    
+    let speechSynth = AVSpeechSynthesizer()
     
     var body: some View {
         VStack(alignment: .trailing) {
@@ -56,7 +59,7 @@ struct AutoAddView: View {
                             .bold()
                             .foregroundColor(.yellow)
                     }
-                    // 이미지 오른쪽 정렬하고 싶다.
+
                     Image(scouter.imageName)
                         .resizable()
                         .frame(width: 130.0, height: 150.0)
@@ -76,7 +79,7 @@ struct AutoAddView: View {
                     
                     Button {
                         scouter = autoScouterStore.AutoAddScouter()
-                        
+                        readSomething(speechSynth: speechSynth, something: "나-니?!..\(scouter.name)")
                     } label: {
                         ZStack {
                             Image("ScouterStick2")
@@ -91,7 +94,7 @@ struct AutoAddView: View {
                     }
                 }
             }
-            // 네비게이션 탑 버튼
+            // 네비게이션 탑 저장 버튼
             ToolbarItem(placement:.navigationBarTrailing) {
                 Button {
                     scouterStore.AddScouter(tier: scouter.tier, name: scouter.name, race: scouter.race, powerLevels: Int(scouter.powerLevels), ImageName: scouter.imageName)
@@ -103,7 +106,7 @@ struct AutoAddView: View {
                 }
                 
             }
-            
+            // 취소 버튼
             ToolbarItem(placement:.navigationBarLeading) {
                 Button {
                     isShowingAutoAddSheet = false
